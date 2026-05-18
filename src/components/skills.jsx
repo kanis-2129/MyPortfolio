@@ -7,6 +7,7 @@ import Node from "../image/node.png";
 import TailwindCSS from "../image/tailwind.png";
 import firebase from "../image/firebase.png";
 import { motion } from "framer-motion";
+import { containerVariants, itemVariants } from "./animation";
 
 const Skill = () => {
   const skills = [
@@ -20,26 +21,6 @@ const Skill = () => {
     { img: firebase, name: "Firebase" },
   ];
 
-  // Container animation for staggered effect
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1, // Logos will appear one after another
-      },
-    },
-  };
-
-  // Individual icon animation
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
 
   return (
     <section id="skills" className="min-h-[60vh] flex flex-col justify-center items-center w-full bg-white py-20">

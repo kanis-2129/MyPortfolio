@@ -3,14 +3,18 @@ import FinalSem from "../image/FinalSem.png";
 import BulkMail from "../image/BulkMail.png";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { containerVariants, itemVariants } from "./animation";
 
 // INDIVIDUAL CARD COMPONENT
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project }
+  
+) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
+    <motion.div
       className="w-full md:w-[42%] lg:w-[38%] h-[380px]"
+      variants={itemVariants}
       style={{ perspective: "1200px" }} // Direct Inline Perspective for guaranteed 3D effect
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -22,7 +26,7 @@ const ProjectCard = ({ project }) => {
         transition={{ duration: 1.3, ease: "easeInOut" }}
       >
         {/* FRONT SIDE: Only Image */}
-        <div
+        <motion.div
           className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white"
           style={{
             backfaceVisibility: "hidden",
@@ -30,14 +34,14 @@ const ProjectCard = ({ project }) => {
             zIndex: isHovered ? 1 : 2, // Dynamic indexing to strictly force show the card elements
           }}
         >
-          <img
+          <motion.img
             src={project.pic.src}
             alt={project.pic.alt}
             className="w-full h-full object-cover block"
           />
           {/* Transparent Overlay tint */}
           <div className="absolute inset-0 bg-purple-900/5" />
-        </div>
+        </motion.div>
 
         {/* BACK SIDE: Content (Text & Buttons) */}
         <div
@@ -79,7 +83,7 @@ const ProjectCard = ({ project }) => {
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -126,11 +130,16 @@ const Projects = () => {
         </motion.h1>
 
         {/* Projects Grid Container */}
-        <div className="flex flex-wrap justify-center gap-12 md:gap-16">
+        <motion.div className="flex flex-wrap justify-center gap-12 md:gap-16"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        >
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
